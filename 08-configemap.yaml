@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: configmap
+metadata:
+    name: nginx-config
+    labels:
+      project: roboshop
+      environment: dev
+      purpose: poc
+data:
+  project: roboshop
+  cource: kubernetes
+  trainer: siva

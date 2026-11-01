@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: pod
+metadata:
+    name: env
+    labels:
+      project: roboshop
+      environment: dev
+      purpose: poc
+
+spec:
+    containers:
+      - name: nginx
+        image: nginx
+        env:
+          - name: project
+            value: roboshop
+          - name: cource
+            value: kubernetes

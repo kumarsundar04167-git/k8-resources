@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    project: roboshop
+    tier: frontend
+    component: frontend
+    purpose: Deployment
+spec:
+  # modify replicas according to your case
+  replicas: 10
+  # replicaset uses these labels to match pods
+  selector:
+    matchLabels:
+      project: roboshop
+      tier: frontend
+      component: frontend
+      purpose: Deployment
+  # pod definition
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        tier: frontend
+        component: frontend
+        purpose: Deployment
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+      ports:
+       - containerport: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  # servicer labels
+  labels:
+    project: roboshop
+    tier: frontend
+    component: frontend
+    purpose: Deployment
+spec:
+  # Service uses the below labels to select the pods
+  selector:
+    project: roboshop
+    tier: frontend
+    component: frontend
+    purpose: Deployment
+  ports:
+    - protocol: TCP
+      port: 80 # service port
+      targetPort: 80 # container port
